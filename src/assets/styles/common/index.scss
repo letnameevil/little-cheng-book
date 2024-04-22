@@ -1,0 +1,32 @@
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fl-c-b {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fl-c {
+  display: flex;
+  align-items: center;
+}
+
+/**
+ * 文字超出显示省略号,单行文本 
+ **/
+.single-text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/**
+ 分页器样式
+*/
+.el-pagination {
+  --el-pagination-border-radius: 0px !important;
+}
