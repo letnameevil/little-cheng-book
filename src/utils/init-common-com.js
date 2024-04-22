@@ -3,6 +3,7 @@ export default {
     const modulesList = import.meta.glob("@/common-components/**/*.vue", {
       eager: true,
     });
+
     for (const key in modulesList) {
       const startIdx = key.lastIndexOf("/");
       const lastIdx = key.lastIndexOf(".");
