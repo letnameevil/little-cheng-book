@@ -16,6 +16,10 @@ const tableData = new Array(100).fill({
   name: "Tom",
   address: "No. 189, Grove St, Los Angeles",
 });
+
+const paginationChange = (payload) => {
+  console.log("payload", payload);
+};
 </script>
 
 <template>
@@ -72,17 +76,12 @@ const tableData = new Array(100).fill({
       <el-table-column prop="address" label="Address" align="center" />
     </el-table>
     <template #footer>
-      <div class="demo-pagination-block">
-        <el-pagination
-          v-model:current-page="currentPage4"
-          v-model:page-size="pageSize4"
-          :page-sizes="[100, 200, 300, 400]"
-          background
-          small
-          layout=" prev, pager, next, jumper,total, sizes,"
-          :total="400"
-        />
-      </div>
+      <Pagination
+        @pagination-change="paginationChange"
+        v-bind="{
+          total: 400,
+        }"
+      />
     </template>
   </el-card>
 </template>

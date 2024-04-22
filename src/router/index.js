@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from "@/layout/index.vue";
 import NotFound from "@/pages/404/index.vue";
+import asyncRoutes from "./async-routes";
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -8,6 +9,7 @@ const router = createRouter({
       path: "/",
       name: "layout",
       component: () => import("@/layout/index.vue"),
+      children: asyncRoutes,
     },
     {
       path: "/login",

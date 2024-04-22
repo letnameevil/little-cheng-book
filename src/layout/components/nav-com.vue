@@ -1,1 +1,3 @@
-<template>daohang</template>
+<script setup></script>
+
+<template>测试</template>

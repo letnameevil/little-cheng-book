@@ -26,21 +26,14 @@ const loginInfoRules = ref({
 const loginRefForm = ref(null);
 
 const handleLogin = () => {
-  console.log("Router.getRoutes()", Router.getRoutes());
-  const codeList = ["hats.1", "hats.2", "hats.3"];
-  const tempList = [];
-  codeList.forEach((code) => {
-    asyncRoutes.forEach((it) => {
-      if (it.meta.authorityCode.includes(code)) {
-        tempList.push(it);
-      }
-    });
-  });
-
-  tempList.forEach((it) => {
-    Router.addRoute("main-page", it);
-  });
-  console.log("Router.getRoutes()", Router.getRoutes());
+  // asyncRoutes.forEach((it) => {
+  //   if (it.meta.authorityCode.includes(code)) {
+  //     tempList.push(it);
+  //   }
+  // });
+  // tempList.forEach((it) => {
+  //   Router.addRoute("main-page", it);
+  // });
   // loginRefForm.value.validate((valid, fields) => {
   //   if (valid) {
   //     // 校验通过调用登录接口

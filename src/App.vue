@@ -3,7 +3,6 @@ import { useToolStore } from "@/stores/tools";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 import en from "element-plus/dist/locale/en.mjs";
 import ru from "element-plus/dist/locale/ru.mjs";
-
 const toolStore = useToolStore();
 
 /**
