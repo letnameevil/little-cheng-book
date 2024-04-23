@@ -46,30 +46,35 @@ const paginationChange = (payload) => {
   </el-card>
   <el-card shadow="never">
     <template #header>
-      <el-button>
+      <el-button type="primary" plain>
         <el-icon class="el-icon--right">
           <icon-ep:plus />
         </el-icon>
         新增
       </el-button>
-      <el-button>
+      <el-button type="success" plain>
         <el-icon class="el-icon--right">
           <icon-ep:upload />
         </el-icon>
         导入
       </el-button>
-      <el-button>
-        <el-icon class="el-icon--right"> <icon-ep:download /> </el-icon>导出
+      <el-button type="info" plain>
+        <el-icon class="el-icon--right">
+          <icon-ep:download />
+        </el-icon>
+        导出
       </el-button>
-      <el-button>
+      <el-button type="warning" plain>
         <el-icon class="el-icon--right">
           <icon-ep:refresh />
         </el-icon>
         同步到维修
       </el-button>
-      <el-button>
-        <el-icon class="el-icon--right"> <icon-ep:delete-filled /> </el-icon
-        >目录清空
+      <el-button type="danger" plain>
+        <el-icon class="el-icon--right">
+          <icon-ep:delete-filled />
+        </el-icon>
+        目录清空
       </el-button>
     </template>
     <el-table :data="tableData" border height="calc(100vh - 250px)">
