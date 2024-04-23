@@ -3,6 +3,7 @@ import config from "@/config/config.title.js";
 import LangSwitch from "@/components/lang-switch/index.vue";
 import asyncRoutes from "@/router/async-routes";
 import { useRouter } from "vue-router";
+import Storage from "@/utils/storage";
 /**
  * api
  **/
@@ -34,19 +35,19 @@ const handleLogin = () => {
   // tempList.forEach((it) => {
   //   Router.addRoute("main-page", it);
   // });
-  // loginRefForm.value.validate((valid, fields) => {
-  //   if (valid) {
-  //     // 校验通过调用登录接口
-  //     $api_login(loginInfo.value).then((res) => {
-  //       // 1.将用户信息存入本地缓存
-  //       Storage.setItem("userInfo", res);
-  //       // 2.通过用户信息去拿权限码
-  //       $api_getAuthCode().then((res) => {
-  //         // 通过权限码过滤
-  //       });
-  //     });
-  //   }
-  // });
+  loginRefForm.value.validate((valid, fields) => {
+    if (valid) {
+      // 校验通过调用登录接口
+      $api_login(loginInfo.value).then((res) => {
+        // 1.将用户信息存入本地缓存
+        if (res) Storage.setItem("userInfo", res);
+        // 2.通过用户信息去拿权限码
+        // $api_getAuthCode().then((res) => {
+        //   // 通过权限码过滤
+        // });
+      });
+    }
+  });
 };
 </script>
 

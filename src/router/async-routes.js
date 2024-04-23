@@ -13,6 +13,15 @@ const asyncRoutes = [
     },
   },
   {
+    path: "/equipment",
+    name: "equipment",
+    component: () => import("@/pages/equipment/index.vue"),
+    meta: {
+      title: "设备管理",
+      authorityCode: ["hats.1"],
+    },
+  },
+  {
     path: "/echart-show",
     name: "echart-show",
     component: () => import("@/pages/echart-show/index.vue"),

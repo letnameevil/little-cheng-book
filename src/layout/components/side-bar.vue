@@ -29,6 +29,11 @@ const arr = [
     icon: "skill-icons:ableton-dark",
   },
   {
+    title: "设备管理",
+    key: "equipment",
+    icon: "skill-icons:ableton-dark",
+  },
+  {
     title: "图表管理",
     key: "echart-show",
     icon: "skill-icons:ableton-dark",

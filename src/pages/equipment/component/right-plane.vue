@@ -1,15 +1,6 @@
 <script setup>
-const formInline = reactive({
-  user: "",
-  region: "",
-  date: "",
-});
-
-const onSubmit = () => {
-  console.log("submit!");
-};
-
-const dialogVisible = ref(true);
+const formInline = ref({});
+const onSubmit = () => {};
 
 const tableData = new Array(100).fill({
   date: "2016-05-03",
@@ -23,44 +14,29 @@ const paginationChange = (payload) => {
 </script>
 
 <template>
-  <el-card>
+  <el-card shadow="never">
     <el-form
       label-width="auto"
       :inline="true"
       :model="formInline"
       class="demo-form-inline"
     >
-      <el-form-item label="名称">
-        <el-input
-          v-model="formInline.user"
-          placeholder="输入名称查询"
-          clearable
-        />
-      </el-form-item>
-      <el-form-item label="名称">
-        <el-input
-          v-model="formInline.user"
-          placeholder="输入名称查询"
-          clearable
-        />
-      </el-form-item>
       <el-form-item label="编码">
-        <el-select
-          v-model="formInline.region"
-          placeholder="选择编码查询"
-          clearable
-        >
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="日期">
-        <el-date-picker
-          v-model="formInline.date"
-          type="date"
-          placeholder="请选择日期"
+        <el-input
+          v-model="formInline.user"
+          placeholder="输入编码查询"
           clearable
         />
+      </el-form-item>
+      <el-form-item label="说明">
+        <el-input
+          v-model="formInline.user"
+          placeholder="输入说明查询"
+          clearable
+        />
+      </el-form-item>
+      <el-form-item label="全目录搜索">
+        <el-checkbox v-model="formInline.checked1" label="是" border />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -68,9 +44,35 @@ const paginationChange = (payload) => {
       </el-form-item>
     </el-form>
   </el-card>
-  <!-- 内容区域 -->
-  <el-card style="margin-top: 4px">
-    <el-table :data="tableData" border height="calc(100vh - 200px)">
+  <el-card shadow="never">
+    <template #header>
+      <el-button>
+        <el-icon class="el-icon--right">
+          <icon-ep:plus />
+        </el-icon>
+        新增
+      </el-button>
+      <el-button>
+        <el-icon class="el-icon--right">
+          <icon-ep:upload />
+        </el-icon>
+        导入
+      </el-button>
+      <el-button>
+        <el-icon class="el-icon--right"> <icon-ep:download /> </el-icon>导出
+      </el-button>
+      <el-button>
+        <el-icon class="el-icon--right">
+          <icon-ep:refresh />
+        </el-icon>
+        同步到维修
+      </el-button>
+      <el-button>
+        <el-icon class="el-icon--right"> <icon-ep:delete-filled /> </el-icon
+        >目录清空
+      </el-button>
+    </template>
+    <el-table :data="tableData" border height="calc(100vh - 250px)">
       <el-table-column prop="date" label="Date" width="180" align="center" />
       <el-table-column prop="name" label="Name" width="180" align="center" />
       <el-table-column prop="address" label="Address" align="center" />
@@ -88,10 +90,6 @@ const paginationChange = (payload) => {
 
 <style scoped>
 .demo-form-inline .el-input {
-  --el-input-width: 220px;
-}
-
-.demo-form-inline .el-select {
-  --el-select-width: 220px;
+  --el-input-width: 160px;
 }
 </style>

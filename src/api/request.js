@@ -23,6 +23,10 @@ class EvRequest {
         return res.data;
       },
       (err) => {
+        ElMessage({
+          message: err.response.data.msg,
+          type: "error",
+        });
         loadingInstance?.close();
       },
     );
