@@ -149,9 +149,20 @@ watch(
         目录清空
       </el-button>
     </template>
-    <el-table :data="logEquipmentList" style="width: 100%" border height="calc(100vh - 280px)">
-      <el-table-column prop="name" label="设备编码" />
-      <el-table-column prop="remark" label="说明" />
+    <el-table
+      :data="logEquipmentList"
+      style="width: 100%"
+      border
+      height="calc(100vh - 280px)"
+    >
+      <el-table-column prop="name" label="设备编码" align="center" />
+      <el-table-column prop="remark" label="说明" align="center" />
+      <el-table-column label="操作" show-overflow-tooltip align="center">
+        <template #default="scope">
+          <el-button type="primary" text>编辑</el-button>
+          <el-button type="danger" text>删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <template #footer>
       <Pagination

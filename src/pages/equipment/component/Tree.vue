@@ -1,5 +1,4 @@
 <script setup>
-import { nextTick } from "vue";
 import { $api_addTreeList, $api_delTreeList } from "@/api/equipment";
 import { $api_getLangByKey } from "@/api/common";
 const Props = defineProps({
@@ -15,6 +14,7 @@ const emit = defineEmits(["handleNodeClick", "reloadData"]);
 
 const treeRef = ref(null);
 const filterText = ref("");
+
 watch(filterText, (val) => {
   treeRef.value.filter(val);
 });
@@ -130,7 +130,7 @@ const handleDialogSubmit = () => {
       v-model="filterText"
       placeholder="请输入关键字进行过滤搜索"
     />
-    <el-scrollbar height="calc(100vh - 126px)">
+    <el-scrollbar height="calc(100vh - 155px)">
       <el-tree
         ref="treeRef"
         highlight-current

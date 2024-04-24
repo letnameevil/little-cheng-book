@@ -26,5 +26,4 @@ const handleLangListEdit = (langList = []) => {
   });
   return list;
 };
-console.log("12", 12);
 window.handleLangListEdit = handleLangListEdit;
