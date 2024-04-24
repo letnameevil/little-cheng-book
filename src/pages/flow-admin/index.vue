@@ -1,43 +1,34 @@
-<script setup>
-import { Graph } from "@antv/x6";
-
-const graph = ref(null);
-
-/**
- * 初始化画布并且创建画布实例
- **/
-const initGraph = () => {
-  graph.value = new Graph({
-    container: document.getElementById("x6-chart"),
-    autoResize: true,
-    grid: {
-      visible: true,
-    },
-  });
-};
-
-onMounted(() => {
-  initGraph();
-  graph.value.addNode({
-    shape: "rect",
-    x: 100,
-    y: 40,
-    width: 100,
-    height: 40,
-  });
-});
-</script>
+<script setup></script>
 
 <template>
-  <el-card>
-    <div class="x6-container">
-      <div id="x6-chart"></div>
+  <div class="box">
+    <div class="box1"></div>
+    <div class="box2">
+      <el-table :data="[]" style="width: 100%" flexible>
+              <el-table-column fixed prop="date" label="Date" width="150" />
+              <el-table-column prop="name" label="Name" width="120" />
+              <el-table-column prop="city" label="City" width="320" />
+              <el-table-column fixed prop="date" label="Date" width="150" />
+              <el-table-column prop="name" label="Name" width="120" />
+              <el-table-column prop="city" label="City" width="320" />
+            </el-table>
     </div>
-  </el-card>
+  </div>
 </template>
 
-<style scoped lang="scss">
-.x6-container {
-  height: 600px;
+<style scoped>
+.box {
+  height: 700px;
+  display: flex;
+  background: #ccc;
+}
+
+.box1 {
+  width: 190px;
+}
+
+.box2 {
+  flex: 1;
+  background-color: red;
 }
 </style>

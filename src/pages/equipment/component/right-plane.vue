@@ -1,16 +1,88 @@
 <script setup>
-const formInline = ref({});
-const onSubmit = () => {};
+import { $api_getEquipmentList, $api_getLogList } from "@/api/equipment";
 
-const tableData = new Array(100).fill({
-  date: "2016-05-03",
-  name: "Tom",
-  address: "No. 189, Grove St, Los Angeles",
+const Props = defineProps({
+  switchValue: {
+    type: Boolean,
+    default: true,
+  },
+  catalogId: {
+    required: true,
+    default: false,
+  },
 });
 
+const formInline = ref({
+  checked1: true,
+});
+const onSubmit = () => {};
+
 const paginationChange = (payload) => {
-  console.log("payload", payload);
+  const { page, size } = payload;
+  pageConfig.value.page = page;
+  pageConfig.value.size = size;
+  loadList();
 };
+
+const pageConfig = ref({
+  page: 1,
+  size: 10,
+  total: 0,
+});
+
+/**
+ * 获取设备列表
+ **/
+const logEquipmentList = ref([]);
+const loadEquipmentList = async () => {
+  const { data } = await $api_getEquipmentList({
+    catalogId: Props.catalogId,
+    checked1: formInline.value.checked1,
+    current: pageConfig.value.page,
+    page: pageConfig.value.page,
+    size: pageConfig.value.size,
+  });
+  pageConfig.value.total = data.total || 0;
+  logEquipmentList.value = data.records || [];
+};
+
+/**
+ * 获取记录列表
+ **/
+const loadLogList = async () => {
+  const { data } = await $api_getLogList({
+    catalogId: Props.catalogId,
+    current: pageConfig.value.page,
+    page: pageConfig.value.page,
+    size: pageConfig.value.size,
+  });
+
+  pageConfig.value.total = data.total || 0;
+  logEquipmentList.value = data.records || [];
+};
+
+/**
+ * 加载列表方法
+ **/
+const loadList = () => {
+  if (Props.switchValue) {
+    loadEquipmentList();
+  } else {
+    loadLogList();
+  }
+};
+
+watch(
+  [() => Props.switchValue, () => Props.catalogId],
+  ([v1, v2]) => {
+    if (v2) {
+      loadList();
+    }
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <template>
@@ -77,17 +149,14 @@ const paginationChange = (payload) => {
         目录清空
       </el-button>
     </template>
-    <el-table :data="tableData" border height="calc(100vh - 250px)">
-      <el-table-column prop="date" label="Date" width="180" align="center" />
-      <el-table-column prop="name" label="Name" width="180" align="center" />
-      <el-table-column prop="address" label="Address" align="center" />
+    <el-table :data="logEquipmentList" style="width: 100%" border height="calc(100vh - 280px)">
+      <el-table-column prop="name" label="设备编码" />
+      <el-table-column prop="remark" label="说明" />
     </el-table>
     <template #footer>
       <Pagination
         @pagination-change="paginationChange"
-        v-bind="{
-          total: 400,
-        }"
+        :total="pageConfig.total"
       />
     </template>
   </el-card>

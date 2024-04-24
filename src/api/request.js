@@ -56,6 +56,13 @@ class EvRequest {
       ...options,
     });
   }
+
+  delete(options = {}) {
+    return this.request({
+      method: "DELETE",
+      ...options,
+    });
+  }
 }
 
 export default EvRequest;

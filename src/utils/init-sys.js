@@ -7,6 +7,7 @@ import i18n from "@/lang/index.js";
  * 初始化系统的一些操作
  * */
 import { $api_getLanguage } from "@/api/common";
+import { handleLangListAdd } from "@/utils/inti-i18nlist";
 /**
  * 语言初始化
  **/
@@ -24,6 +25,7 @@ async function initLanguage() {
   } else {
     toolStore.languageList = data;
   }
+  window.languageList = handleLangListAdd(data);
   toolStore.toggleLanguage();
 }
 
