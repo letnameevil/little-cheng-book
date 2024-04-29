@@ -22,3 +22,26 @@ export const $api_getLangByKey = (key) => {
     isLoading: true,
   });
 };
+
+/**
+ * 导出模板
+ * */
+export const $api_exportTemplate = (url) => {
+  return evRequest.post({
+    url,
+    isLoading: true,
+    responseType: "blob",
+  });
+};
+
+/**
+ ** 上传模板
+ */
+
+export const $api_importTemplate = (url, data) => {
+  return evRequest.post({
+    url,
+    data,
+    isLoading: true,
+  });
+};

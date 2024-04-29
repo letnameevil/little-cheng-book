@@ -1,89 +1,91 @@
 <script setup>
-import TreeList from "@/components/tree-list/index.vue";
-import { $api_getTreeList } from "@/api/equipment";
-import { $api_getEquipmentList } from "@/api/equipment";
-/**
- * 获取设备树
- **/
-const catalogId = ref(0);
-const treeList = ref([]);
-const loadTreeList = async () => {
-  const { data } = await $api_getTreeList();
-  treeList.value = data;
-  catalogId.value = data[0]?.id || 0;
+import SelectBox from "./components/select-box.vue";
+const dialogVisible = ref(false);
+
+const list = ref([]);
+
+const btnClick = () => {
+  list.value = [
+    {
+      id: 15080,
+      createUser: "1123598821738675201",
+      createTime: "2024-04-10 16:16:46",
+      updateUser: "1123598821738675201",
+      updateTime: "2024-04-10 16:16:46",
+      version: 0,
+      name: "yqf-cs-001",
+      nameEnglish: "yqf-cs-001",
+      nameKey: 672358,
+      nameI18nList: null,
+      code: "yqf-cs-001",
+      catalogId: 2151,
+      type: "",
+      typeName: null,
+      remark: "cs",
+      isVirtual: " ",
+      language: null,
+      searchType: null,
+      checked1: null,
+      deviceSignalLogConfigList: null,
+      pid: null,
+      catalogIdLink: "2151,",
+      catalogCodeLink: null,
+      belongTo: "",
+      belongToName: null,
+      signalLogConfigName: null,
+      catalogNameList: null,
+      businessType: null,
+    },
+    {
+      id: 15081,
+      createUser: "1123598821738675201",
+      createTime: "2024-04-11 10:13:16",
+      updateUser: "1123598821738675201",
+      updateTime: "2024-04-11 10:13:16",
+      version: 0,
+      name: "yqf-cs-002",
+      nameEnglish: "yqf-cs-002",
+      nameKey: 672359,
+      nameI18nList: null,
+      code: "yqf-cs-002",
+      catalogId: 2151,
+      type: "",
+      typeName: null,
+      remark: "yqf-cs-002",
+      isVirtual: " ",
+      language: null,
+      searchType: null,
+      checked1: null,
+      deviceSignalLogConfigList: null,
+      pid: null,
+      catalogIdLink: "2151,",
+      catalogCodeLink: null,
+      belongTo: "",
+      belongToName: null,
+      signalLogConfigName: null,
+      catalogNameList: null,
+      businessType: null,
+    },
+  ];
+  dialogVisible.value = true;
 };
 
-loadTreeList();
-
-// 点击其他节点时出发的事件
-const handleNodeClick = (payload) => {
-  catalogId.value = payload.id;
-};
-
-// 右侧数据
-const formInline = ref({});
-
-const tableList = ref([]);
-const loadTableList = async () => {
-  const { data } = await $api_getEquipmentList({
-    catalogId: Props.catalogId,
-    checked1: formInline.value.checked1,
-    current: pageConfig.value.page,
-    page: pageConfig.value.page,
-    size: pageConfig.value.size,
-  });
-  pageConfig.value.total = data.total || 0;
-  logEquipmentList.value = data.records || [];
+const getRowData = (payload) => {
+  console.log("payload", payload);
+  dialogVisible.value = false;
+  list.value = [];
 };
 </script>
 
 <template>
-  <el-card>
-    <el-row :gutter="10">
-      <el-col :span="4">
-        <TreeList
-          :tree-list="treeList"
-          :catalogId="catalogId"
-          @handleNodeClick="handleNodeClick"
-        />
-      </el-col>
-      <el-col :span="20">
-        <el-card shadow="never">
-          <template #header>
-            <el-form
-              label-width="auto"
-              :inline="true"
-              :model="formInline"
-              class="demo-form-inline"
-            >
-              <el-form-item label="关键字">
-                <el-input
-                  v-model="formInline.user"
-                  placeholder="输入关键字查询"
-                  clearable
-                />
-              </el-form-item>
-              <el-form-item label="全目录搜索">
-                <el-checkbox v-model="formInline.checked1" label="是" border />
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary">查询</el-button>
-                <el-button>重置</el-button>
-              </el-form-item>
-            </el-form>
-          </template>
-          <el-table :data="[]" style="width: 100%">
-            <el-table-column prop="date" label="Date" width="180" />
-            <el-table-column prop="name" label="Name" width="180" />
-            <el-table-column prop="date" label="Date" width="180" />
-            <el-table-column prop="name" label="Name" width="180" />
-            <el-table-column prop="date" label="Date" width="180" />
-            <el-table-column prop="name" label="Name" width="180" />
-            <el-table-column prop="date" label="Date" width="180" />
-            <el-table-column prop="name" label="Name" width="180" />
-          </el-table>
-        </el-card>
-      </el-col>
-    </el-row>
-  </el-card>
+  <div class="flow-admin-page">
+    <el-button @click="btnClick"> 点击测试 </el-button>
+    <el-dialog v-model="dialogVisible" draggable width="1000">
+      <SelectBox
+        @getRowData="getRowData"
+        :showDataList="list"
+        :isMultiple="true"
+      ></SelectBox>
+    </el-dialog>
+  </div>
 </template>

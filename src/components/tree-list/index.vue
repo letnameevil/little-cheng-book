@@ -1,6 +1,4 @@
 <script setup>
-import { $api_addTreeList, $api_delTreeList } from "@/api/equipment";
-import { $api_getLangByKey } from "@/api/common";
 const Props = defineProps({
   treeList: {
     type: Array,
@@ -41,9 +39,6 @@ const defaultProps = {
   children: "children",
   label: "name",
 };
-
-
-
 </script>
 
 <template>
@@ -53,12 +48,11 @@ const defaultProps = {
       v-model="filterText"
       placeholder="请输入关键字进行过滤搜索"
     />
-    <el-scrollbar height="calc(100vh - 155px)">
+    <el-scrollbar height="calc(100% - 35px)">
       <el-tree
         ref="treeRef"
         highlight-current
         node-key="id"
-        style="max-width: 600px"
         :data="treeList"
         :props="defaultProps"
         @current-change="handleNodeClick"
@@ -70,7 +64,7 @@ const defaultProps = {
 
 <style lang="scss" scoped>
 .search-input {
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 .tree-container {
   height: 100%;
